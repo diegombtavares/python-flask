@@ -14,7 +14,7 @@ Flask é um framework leve de desenvolvimento web em Python. Ele foi criado por 
 
 Aqui está um exemplo básico de um aplicativo Flask:
 
-\`\`\`python
+```python
 from flask import Flask
 
 app = Flask(__name__)
@@ -25,7 +25,7 @@ def hello():
 
 if __name__ == '__main__':
     app.run()
-\`\`\`
+```
 
 Este aplicativo cria uma instância do Flask e define uma rota para a URL raiz (`'/'`). Quando alguém acessa essa URL, a função `hello()` é chamada, retornando a mensagem "Hello, world!".
 
@@ -33,9 +33,9 @@ Este aplicativo cria uma instância do Flask e define uma rota para a URL raiz (
 
 Você pode instalar Flask facilmente usando o pip, o gerenciador de pacotes do Python:
 
-\`\`\`bash
+```bash
 pip install Flask
-\`\`\`
+````
 
 ## Documentação
 
