@@ -35,7 +35,7 @@ Você pode instalar Flask facilmente usando o pip, o gerenciador de pacotes do P
 
 ```bash
 pip install Flask
-```
+\`\`\`
 
 ## Documentação
 
