@@ -14,18 +14,20 @@ def login():
 def autenticar():
     form = FormularioUsuario(request.form)
     usuario = Usuarios.query.filter_by(nickname=form.nickname.data).first()
-    senha = check_password_hash(usuario.senha, form.senha.data)
-    if usuario and senha:
-        session['usuario_logado'] = usuario.nickname
-        flash(usuario.nickname + ' logado com sucesso')
-        proxima_pagina = request.form['proxima']
-        return redirect(proxima_pagina)
-    else:
-        flash('Usuário não logado')
-        return redirect(url_for('login'))
+    
+    if usuario is not None:
+        senha_correta = check_password_hash(usuario.senha, form.senha.data)
+        if senha_correta:
+            session['usuario_logado'] = usuario.nickname
+            flash(usuario.nickname + ' logado com sucesso', 'succes')
+            proxima_pagina = request.form['proxima']
+            return redirect(proxima_pagina)
+    
+    flash('Credencias Inválidas', 'error')
+    return redirect(url_for('login'))
     
 @app.route('/logout')
 def logout():
     session['usuario_logado'] = None
-    flash('Logout efetuado com sucesso')
+    flash('Logout efetuado com sucesso', 'succes')
     return redirect(url_for('login'))

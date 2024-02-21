@@ -3,19 +3,29 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Jogoteca</title>
+    <title>Devops Culture</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='message.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   </head>
   <body>
       <div class="container">
 
-        {% with messages = get_flashed_messages() %}
-            {% if messages %} 
-                <ul id="messages" class="list-unstyled">
-                {% for message in messages %}
-                    <li class="alert alert-success">{{ message }}</li>
-                {% endfor %}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul id="messages" class="list-unstyled" style="position: fixed; top: 20px; right: 20px;">
+                    {% for category, message in messages %}
+                        {% if category == 'error' %}
+                            <li class="alert alert-danger">
+                                <i class="fas fa-exclamation-circle"></i> {{ message }}
+                            </li>
+                        {% else %}   
+                            <li class="alert alert-success">
+                                <i class="fas fa-check-circle"></i> {{ message }}
+                            </li> 
+                        {% endif %}
+                    {% endfor %}
                 </ul>
             {% endif %}
         {% endwith %}
@@ -28,6 +38,7 @@
 
             <script type="text/javascript" src="{{ url_for('static', filename='jquery.js') }}"></script>
             <script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script>
+            <script type="text/javascript" src="{{ url_for('static', filename='message.js') }}"></script>
         </div>
     </body>
 </html>
