@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, session, flash, url_for, send_from_directory
 from main import app, db
 from models import Jogos
-from helpers import recupera_imagem, deleta_arquivo, FormularioJogo
+from helpers.modules import recupera_imagem, deleta_arquivo, FormularioJogo
 import time
 
 @app.route('/')

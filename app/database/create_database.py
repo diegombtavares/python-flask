@@ -68,7 +68,7 @@ for tabela_nome in TABLES:
 usuario_sql = 'INSERT INTO usuarios (nome, nickname, senha) values (%s,%s,%s)'
 
 usuarios = [
-    ("Juninho Mahones", "mahones", generate_password_hash("123").decode('utf-8')),
+    ("Administrator", "adm", generate_password_hash("123").decode('utf-8')),
     ("Zeca Linus", "zaca", generate_password_hash("123").decode('utf-8'))
 ]
 
@@ -83,10 +83,9 @@ for user in cursor.fetchall():
 jogo_sql = 'INSERT INTO jogos (nome, categoria, console) values (%s,%s,%s)'
 
 jogos = [
-    ("Tetris", "Puzzle", "Atari"),
-    ("God of War", "Hack and Slash", "PS2"),
-    ("Mortal Kombat I", "Luta", "PS2"),
-    ("Need for Speed", "HCorrida", "PC"),
+    ("Rainbow Six", "FPS", "PC"),
+    ("God of War", "Hack and Slash", "PS5"),
+    ("Red Dead Redemption II", "Ação", "PC"),
 ]
 
 cursor.executemany(jogo_sql,jogos)
