@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">    
   </head>
-  <body class="body_login">
+  <body class="body_login" >
     <div class="container">
 
         {% with messages = get_flashed_messages(with_categories=true) %}
@@ -40,7 +40,7 @@
             <div class="form-group input-with-icon">
                 <i class="fas fa-lock"></i>
                 {{ form.senha(class="form-control", placeholder="Senha") }}
-                <span class="input-icon-right" onclick="mostrarSenha()">
+                <span class="input-icon-right pointer" onclick="mostrarSenha()">
                     <i class="fas fa-eye"></i>
                 </span>
             </div>

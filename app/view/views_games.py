@@ -6,7 +6,17 @@ import time
 
 @app.route('/')
 def index():
+    if 'usuario_logado' not in session or session['usuario_logado'] == None:
+        return redirect(url_for('login', proxima=url_for('index')))
+    
+    return render_template('index.html')
+
+@app.route('/jogos')
+def jogos():
+    if 'usuario_logado' not in session or session['usuario_logado'] == None:
+        return redirect(url_for('login', proxima=url_for('jogos')))
     lista = Jogos.query.order_by(Jogos.id)
+    print(lista)
     return render_template('lista.html', titulo='Jogos', jogos=lista)
 
 @app.route('/novo')
@@ -90,4 +100,4 @@ def criar():
 
 @app.route('/uploads/<nome_arquivo>')
 def imagem(nome_arquivo):
-    return send_from_directory('uploads', nome_arquivo)
+    return send_from_directory('public', nome_arquivo)

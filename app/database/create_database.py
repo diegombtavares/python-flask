@@ -42,11 +42,12 @@ TABLES['Jogos'] = ('''
     COLLATE = utf8_bin; ''')
 
 TABLES['Usuarios'] = ('''
-    CREATE TABLE `jogoteca`.`usuarios` (      
+    CREATE TABLE `jogoteca`.`usuarios` (   
+      `id` INT NOT NULL AUTO_INCREMENT,
       `nome` VARCHAR(50) NOT NULL,
       `nickname` VARCHAR(10) NOT NULL,
       `senha` VARCHAR(100) NOT NULL,
-      PRIMARY KEY (`nickname`))
+      PRIMARY KEY (`id`))
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8
     COLLATE = utf8_bin;  ''')
@@ -69,7 +70,6 @@ usuario_sql = 'INSERT INTO usuarios (nome, nickname, senha) values (%s,%s,%s)'
 
 usuarios = [
     ("Administrator", "adm", generate_password_hash("123").decode('utf-8')),
-    ("Zeca Linus", "zaca", generate_password_hash("123").decode('utf-8'))
 ]
 
 cursor.executemany(usuario_sql,usuarios)

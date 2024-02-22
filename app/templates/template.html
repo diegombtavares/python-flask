@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/message.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
   </head>
   <body>
       <div class="container">
@@ -30,10 +31,19 @@
             {% endif %}
         {% endwith %}
 
-        <div class="page-header">
-            <h1>{{ titulo }}</h1>
+        <div class="vertical-bar">
+            <ul class="icon-list">
+                <li data-tooltip="Primeiro Ícone"><a href="#"><i class="fa-solid fa-house"></i></a></li>
+                <li class="separator"></li>
+                <li data-tooltip="Segundo Ícone"><a href="#"><i class="fa-solid fa-list"></i></a></li>
+                <li class="separator"></li>
+                <li data-tooltip="Terceiro Ícone"><a href="{{ url_for('jogos') }}"><i class="fa-solid fa-gamepad"></i></a></li>
+                <li class="separator"></li>
+                <li data-tooltip="Quarto Ícone"><a href="{{ url_for('user') }}"><i class="fas fa-user"></i></a></li>
+                <li class="bottom-icon" data-tooltip="Quinto Ícone"><a href="{{ url_for('logout') }}"><i class="fa-solid fa-right-to-bracket"></i></a></li>
+            </ul>
         </div>
-
+    
         {% block conteudo %} {% endblock %}
 
             <script type="text/javascript" src="{{ url_for('static', filename='javascript/jquery.js') }}"></script>
