@@ -4,6 +4,7 @@
 <div class="navbar-pages">
     <span class="title">{{ titulo }}</span>
     <a class="btn btn-primary" href="{{ url_for('novo') }}" style="float: right;">Novo Usuário</a>
+    <input type="text" id="search-input" placeholder="Buscar..." style="float: right;">
 </div>
 
 <table class="table-container">
@@ -11,7 +12,7 @@
         <tr>
             <th style="text-align: center; vertical-align: middle;">Nome</th>
             <th style="text-align: center; vertical-align: middle;">User</th>
-            <th style="text-align: center; vertical-align: middle;">User</th>
+            <th style="text-align: center; vertical-align: middle;">Ações</th>
         </tr>
     </thead>
     <tbody>
@@ -20,8 +21,8 @@
             <td style="text-align: center; vertical-align: middle;">{{ usuario.nome }}</td>
             <td style="text-align: center; vertical-align: middle;">{{ usuario.nickname }}</td>
             <td style="text-align: center; vertical-align: middle; width: 100px; height: 50px;">
-                <i class="fa-solid fa-pen-to-square" style="font-size: 20px; margin-right: 10px;"></i>
-                <i class="fa-solid fa-trash" style="font-size: 20px;"></i>
+                <a class="fa-solid fa-pen-to-square actions" style="font-size: 20px; text-decoration: none;" href="{{ url_for('editar_user', id=usuario.id) }}"></a>
+                <a class="fa-solid fa-trash actions" style="font-size: 20px; text-decoration: none;" href="{{ url_for('deletar_user', id=usuario.id) }}"></a>
             </td>
         </tr>
         {% endfor %}
@@ -52,5 +53,14 @@
             <span class="pagination-arrow disabled">&gt;</span>
         {% endif %}
     </div>
-
+    <script>
+        document.getElementById('search-input').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                var searchQuery = this.value.trim();
+                var currentUrl = new URL(window.location.href);
+                currentUrl.searchParams.set('q', searchQuery);
+                window.location.href = currentUrl.href;
+            }
+        });
+    </script>
 {% endblock %}

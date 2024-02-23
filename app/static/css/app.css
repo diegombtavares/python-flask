@@ -14,6 +14,7 @@ body {
     transition: background-color 0.3s ease;
     margin-top: 10px;
     font-weight: 700;
+
 }
 
 
@@ -126,7 +127,7 @@ td {
 
 .icon-list li i {
     color: white;
-    font-size: 24px;
+    font-size: 20px;
 }
 
 .bottom-icon {
@@ -157,6 +158,7 @@ td {
     border-radius: 10px;
     overflow: hidden; 
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); 
+    align-items: center;
 }
 
 .table-container th {
@@ -229,4 +231,33 @@ td {
     outline: none;
     background-color: #fff;
     box-shadow: 0 0 0 2px #007bff;
+}
+
+.actions{
+    color: #333;
+    margin: 2px;
+}
+
+.actions:hover {
+    color: #80878f;
+}
+
+#search-input {
+    width: 200px;
+    height: 40px;
+    padding: 10px; 
+    margin-top: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 15px;
+    background-color: #fff; 
+    transition: border-color 0.3s ease; 
+    align-items: center;
+    margin-right: 10px;
+}
+
+#search-input:hover,
+#search-input:focus {
+    border-color: #007bff; 
+    outline: none;
 }

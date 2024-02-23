@@ -1,0 +1,21 @@
+{% extends "template.html" %}
+{% block conteudo %}
+        <form class="formulariousuario" action="{{ url_for('atualizar_user') }}" method="post" enctype="multipart/form-data">
+
+          <fieldset>
+            <input type="hidden" name="id" value="{{ id }}">
+            {{ form.csrf_token() }}
+            <div class="form-group inputBox">
+              {{ form.nome.label(class="form-label") }}
+              {{ form.nome(class="form-control") }}
+            </div>
+            <div class="form-group inputBox">
+              {{ form.nickname.label(class="form-label") }}
+              {{ form.nickname(class="form-control") }}
+            </div>
+            <div class="form-group buttons">
+              {{ form.salvar(class="btn btn-primary") }}
+              <a class="btn btn-danger" href="{{ url_for('user') }}">Voltar</a>
+            </div>
+          </fieldset>
+{% endblock %}

@@ -21,17 +21,17 @@ else:
 
 cursor = conn.cursor()
 
-cursor.execute("DROP DATABASE IF EXISTS jogoteca;")
+cursor.execute("DROP DATABASE IF EXISTS devops_culture;")
 
-cursor.execute("CREATE DATABASE jogoteca;")
+cursor.execute("CREATE DATABASE devops_culture;")
 
-cursor.execute("USE jogoteca")
+cursor.execute("USE devops_culture")
 
 # criando tabelas
 TABLES = {}
 
 TABLES['Jogos'] = ('''
-    CREATE TABLE `jogoteca`.`jogos` (
+    CREATE TABLE `devops_culture`.`jogos` (
       `id` INT NOT NULL AUTO_INCREMENT,
       `nome` VARCHAR(50) NOT NULL,
       `categoria` VARCHAR(40) NOT NULL,
@@ -42,7 +42,7 @@ TABLES['Jogos'] = ('''
     COLLATE = utf8_bin; ''')
 
 TABLES['Usuarios'] = ('''
-    CREATE TABLE `jogoteca`.`usuarios` (   
+    CREATE TABLE `devops_culture`.`usuarios` (   
       `id` INT NOT NULL AUTO_INCREMENT,
       `nome` VARCHAR(50) NOT NULL,
       `nickname` VARCHAR(10) NOT NULL,
@@ -74,7 +74,7 @@ usuarios = [
 
 cursor.executemany(usuario_sql,usuarios)
 
-cursor.execute('select * from jogoteca.usuarios')
+cursor.execute('select * from devops_culture.usuarios')
 print('---------------- Usuários ----------------')
 for user in cursor.fetchall():
     print(user[0])
@@ -90,7 +90,7 @@ jogos = [
 
 cursor.executemany(jogo_sql,jogos)
 
-cursor.execute('select * from jogoteca.jogos')
+cursor.execute('select * from devops_culture.jogos')
 print('---------------- Jogos ----------------')
 for jogo in cursor.fetchall():
     print(jogo[1])

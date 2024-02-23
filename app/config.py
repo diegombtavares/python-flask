@@ -7,7 +7,7 @@ SQLALCHEMY_DATABASE_URI = '{SGBD}://{usuario}:{senha}@{servidor}/{database}'.for
     usuario = 'root',
     senha = 'user',
     servidor = 'localhost',
-    database = 'jogoteca'
+    database = 'devops_culture'
 )
 
 UPLOAD_PATH = os.path.dirname(os.path.abspath(__file__)) + '/uploads'

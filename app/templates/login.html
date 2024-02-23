@@ -31,7 +31,7 @@
 
         <form method="POST" action="{{ url_for('autenticar') }}">
             <h1 class="titleform" style="text-align: center; font-family: 'Arial', sans-serif; font-size: 28px; color: #333; letter-spacing: 1px;"><strong>Devops Culture</strong></h1>
-            <input type="hidden" name="proxima" value="{{ proxima or url_for('index') }}">
+            <input type="hidden" name="proxima" value="{{ proxima or url_for('user') }}">
             {{ form.csrf_token() }}
             <div class="form-group input-with-icon">
                 <i class="fas fa-user"></i>
