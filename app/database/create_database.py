@@ -45,7 +45,7 @@ TABLES['Usuarios'] = ('''
     CREATE TABLE `devops_culture`.`usuarios` (   
       `id` INT NOT NULL AUTO_INCREMENT,
       `nome` VARCHAR(50) NOT NULL,
-      `nickname` VARCHAR(10) NOT NULL,
+      `user` VARCHAR(10) NOT NULL,
       `senha` VARCHAR(100) NOT NULL,
       PRIMARY KEY (`id`))
     ENGINE = InnoDB
@@ -66,7 +66,7 @@ for tabela_nome in TABLES:
         print('ok')
 
 # inserindo usuários
-usuario_sql = 'INSERT INTO usuarios (nome, nickname, senha) values (%s,%s,%s)'
+usuario_sql = 'INSERT INTO usuarios (nome, user, senha) values (%s,%s,%s)'
 
 usuarios = [
     ("Administrator", "adm", generate_password_hash("123").decode('utf-8')),

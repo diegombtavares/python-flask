@@ -1,21 +1,47 @@
-{% extends "template.html" %}
-{% block conteudo %}
-        <form class="formulariousuario" action="{{ url_for('atualizar_user') }}" method="post" enctype="multipart/form-data">
-
-          <fieldset>
-            <input type="hidden" name="id" value="{{ id }}">
-            {{ form.csrf_token() }}
-            <div class="form-group inputBox">
-              {{ form.nome.label(class="form-label") }}
-              {{ form.nome(class="form-control") }}
-            </div>
-            <div class="form-group inputBox">
-              {{ form.nickname.label(class="form-label") }}
-              {{ form.nickname(class="form-control") }}
-            </div>
-            <div class="form-group buttons">
-              {{ form.salvar(class="btn btn-primary") }}
-              <a class="btn btn-danger" href="{{ url_for('user') }}">Voltar</a>
-            </div>
-          </fieldset>
+{% extends "template.html" %} {% block conteudo %}
+<style>
+  .card {
+    margin-top: 20px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  }
+</style>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <form
+            action="{{ url_for('atualizar_user') }}"
+            method="post"
+            enctype="multipart/form-data"
+          >
+            <fieldset>
+              <input type="hidden" name="id" value="{{ id }}" />
+              {{ form.csrf_token() }}
+              <div class="form-group">
+                {{ form.nome.label(style="margin-top: 5px") }} {{
+                form.nome(class="form-control") }}
+              </div>
+              <div class="form-group">
+                {{ form.user.label(style="margin-top: 5px") }} {{
+                form.user(class="form-control") }}
+              </div>
+              <div class="form-group">
+                {{ form.senha.label(style="margin-top: 5px") }} {{
+                form.senha(class="form-control", placeholder="**************")
+                }}
+              </div>
+              <div class="form-group" style="margin-top: 20px">
+                {{ form.salvar(class="btn btn-primary") }}
+                <a class="btn btn-danger" href="{{ url_for('user') }}"
+                  >Voltar</a
+                >
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

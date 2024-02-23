@@ -2,7 +2,7 @@ from main import app, db
 from flask import render_template, request, redirect, session, flash, url_for
 from models import Usuarios
 from helpers.modules import FormularioUsuario
-from flask_bcrypt import check_password_hash
+from flask_bcrypt import check_password_hash, generate_password_hash
 
 @app.route('/login')
 def login():
@@ -13,16 +13,15 @@ def login():
 @app.route('/autenticar', methods=['POST',])
 def autenticar():
     form = FormularioUsuario(request.form)
-    usuario = Usuarios.query.filter_by(nickname=form.nickname.data).first()
+    usuario = Usuarios.query.filter_by(user=form.user.data).first()
     
     if usuario is not None:
         senha_correta = check_password_hash(usuario.senha, form.senha.data)
         if senha_correta:
-            session['usuario_logado'] = usuario.nickname
-            flash(usuario.nickname + ' logado com sucesso', 'succes')
+            session['usuario_logado'] = usuario.user
+            flash(usuario.user + ' logado com sucesso', 'succes')
             proxima_pagina = request.form['proxima']
             return redirect(proxima_pagina)
-    
     flash('Credencias Inválidas', 'error')
     return redirect(url_for('login'))
     
@@ -43,7 +42,7 @@ def user():
     por_pagina = 10
     
     if search_query:
-        lista = Usuarios.query.filter((Usuarios.nome.ilike(f"%{search_query}%")) | (Usuarios.nickname.ilike(f"%{search_query}%"))) \
+        lista = Usuarios.query.filter((Usuarios.nome.ilike(f"%{search_query}%")) | (Usuarios.user.ilike(f"%{search_query}%"))) \
                               .order_by(Usuarios.id) \
                               .paginate(page=page, per_page=por_pagina)
     else:
@@ -73,8 +72,10 @@ def editar_user(id):
     
     usuario = Usuarios.query.filter_by(id=id). first()
     form = FormularioUsuario()
-    form.nickname.data = usuario.nickname
+    form.user.data = usuario.user
     form.nome.data = usuario.nome
+    form.senha.data = usuario.senha
+
     return render_template('user/editar-user.html', titulo='Editando Usuário', id=id, form=form)
 
 @app.route('/atualizar-user', methods=['POST',])
@@ -83,7 +84,6 @@ def atualizar_user():
     usuario = Usuarios.query.get(usuario_id) 
 
     if usuario is None:
-        
         flash('Usuário não encontrado.', 'error')
         return redirect(url_for('user'))
 
@@ -92,6 +92,10 @@ def atualizar_user():
     if form.validate_on_submit():
         form.populate_obj(usuario)
 
+        nova_senha = request.form.get('senha')
+        if nova_senha:
+            usuario.senha = generate_password_hash(nova_senha).decode('utf-8')
+
         db.session.commit()
 
         flash('Usuário atualizado com sucesso.', 'success')
@@ -99,3 +103,36 @@ def atualizar_user():
 
     flash('Erro ao atualizar o usuário. Por favor, corrija os erros no formulário.', 'error')
     return render_template('user/editar-user.html', titulo='Editando Usuário', id=usuario_id, form=form)
+
+
+@app.route('/novo-user')
+def novo_user():
+    if 'usuario_logado' not in session or session['usuario_logado'] is None:
+        return redirect(url_for('login', proxima=url_for('novo_user')))
+    form = FormularioUsuario()
+    return render_template('user/new-user.html', titulo='Novo Usuário', form=form)
+
+@app.route('/criar-user', methods=['POST'])
+def criar_user():
+    form = FormularioUsuario(request.form)
+
+    if not form.validate_on_submit():
+        return redirect(url_for('novo'))
+
+    nome = form.nome.data
+    user = form.user.data
+    senha = form.senha.data
+    
+    usuario = Usuarios.query.filter_by(nome=nome).first()
+
+    if usuario:
+        flash('Usuário já existente')
+        return redirect(url_for('user'))
+
+    senha_hash = generate_password_hash(senha).decode('utf-8') 
+
+    novo_user = Usuarios(nome=nome, user=user, senha=senha_hash)
+    db.session.add(novo_user)
+    db.session.commit()
+
+    return redirect(url_for('user'))

@@ -3,13 +3,13 @@
 
 <div class="navbar-pages">
     <span class="title">{{ titulo }}</span>
-    <a class="btn btn-primary" href="{{ url_for('novo') }}" style="float: right;">Novo Usuário</a>
+    <a class="btn btn-primary" href="{{ url_for('novo_user') }}" style="float: right;">Novo Usuário</a>
     <input type="text" id="search-input" placeholder="Buscar..." style="float: right;">
 </div>
 
 <table class="table-container">
     <thead class="thead-default">
-        <tr>
+        <tr>  
             <th style="text-align: center; vertical-align: middle;">Nome</th>
             <th style="text-align: center; vertical-align: middle;">User</th>
             <th style="text-align: center; vertical-align: middle;">Ações</th>
@@ -29,38 +29,37 @@
     </tbody>
 </table>
 
+<div class="pagination-arrows" style="float: right;">
 
-    <div class="pagination-arrows" style="float: right;">
-
-        <div class="pagination-dropdown-container" >
-            <select onchange="window.location.href=this.value" class="pagination-dropdown">
-                {% for page_num in range(1, usuarios.pages + 1) %}
-                    <option value="{{ url_for('user', page=page_num) }}" {% if usuarios.page == page_num %} selected {% endif %}>{{ page_num }}</option>
-                {% endfor %}
-            </select>
-        </div>
-
-
-        {% if usuarios.has_prev %}
-            <a href="{{ url_for('user', page=usuarios.prev_num) }}" class="pagination-arrow">&lt;</a>
-        {% else %}
-            <span class="pagination-arrow disabled">&lt;</span>
-        {% endif %}
-
-        {% if usuarios.has_next %}
-            <a href="{{ url_for('user', page=usuarios.next_num) }}" class="pagination-arrow">&gt;</a>
-        {% else %}
-            <span class="pagination-arrow disabled">&gt;</span>
-        {% endif %}
+    <div class="pagination-dropdown-container" >
+        <select onchange="window.location.href=this.value" class="pagination-dropdown">
+            {% for page_num in range(1, usuarios.pages + 1) %}
+                <option value="{{ url_for('user', page=page_num) }}" {% if usuarios.page == page_num %} selected {% endif %}>{{ page_num }}</option>
+            {% endfor %}
+        </select>
     </div>
-    <script>
-        document.getElementById('search-input').addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                var searchQuery = this.value.trim();
-                var currentUrl = new URL(window.location.href);
-                currentUrl.searchParams.set('q', searchQuery);
-                window.location.href = currentUrl.href;
-            }
-        });
-    </script>
+
+    {% if usuarios.has_prev %}
+        <a href="{{ url_for('user', page=usuarios.prev_num) }}" class="pagination-arrow">&lt;</a>
+    {% else %}
+        <span class="pagination-arrow disabled">&lt;</span>
+    {% endif %}
+
+    {% if usuarios.has_next %}
+        <a href="{{ url_for('user', page=usuarios.next_num) }}" class="pagination-arrow">&gt;</a>
+    {% else %}
+        <span class="pagination-arrow disabled">&gt;</span>
+    {% endif %}
+</div>
+
+<script>
+    document.getElementById('search-input').addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            var searchQuery = this.value.trim();
+            var currentUrl = new URL(window.location.href);
+            currentUrl.searchParams.set('q', searchQuery);
+            window.location.href = currentUrl.href;
+        }
+    });
+</script>
 {% endblock %}
