@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session, flash, url_for
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CSRFProtect
 from flask_bcrypt import Bcrypt
@@ -10,6 +10,7 @@ db = SQLAlchemy(app)
 csrf = CSRFProtect(app)
 bcrypt = Bcrypt(app)
 
+from view.view_login import *
 from view.views_user import *
 
 if __name__ == '__main__':
