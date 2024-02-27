@@ -1,0 +1,47 @@
+.vertical-bar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0; 
+    width: 55px; 
+    background-image: linear-gradient(to right, #002b7f, #0047ab);
+    z-index: 9999;
+}
+
+.icon-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.icon-list li {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.icon-list .separator {
+    width: 40px;
+    height: 1px; 
+    background-color: rgb(1, 1, 126); 
+}
+
+.icon-list li i {
+    color: white;
+    font-size: 20px;
+}
+
+.bottom-icon {
+    position: absolute;
+    bottom: 20px;
+}
+
+.bottom-icon i {
+    color: white;
+    font-size: 24px;
+}

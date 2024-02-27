@@ -17,8 +17,18 @@ document.addEventListener('DOMContentLoaded', function() {
     var messages = document.getElementById('messages');
 
     if (messages) {
-        // Adicione a classe para a transição de opacidade
         messages.classList.add('message-transition');
+
+        messages.addEventListener('click', function(event) {
+            var closeBtn = event.target.closest('.close');
+            if (closeBtn) {
+                var messageItem = closeBtn.closest('.alert');
+                messageItem.style.opacity = '0';
+                setTimeout(function() {
+                    messageItem.remove();
+                }, 500);
+            }
+        });
 
         setTimeout(function() {
             messages.style.opacity = '0';

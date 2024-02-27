@@ -1,10 +1,13 @@
 {% extends "template.html" %}
 {% block conteudo %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/user/user.css') }}">
 
 <div class="navbar-pages">
     <span class="title">{{ titulo }}</span>
-    <a class="btn btn-primary" href="{{ url_for('novo_user') }}" style="float: right;">Novo Usuário</a>
-    <input type="text" id="search-input" placeholder="Buscar..." style="float: right;">
+    <div class="navbar-buttons">
+        <input type="text" id="search-input" placeholder="Buscar...">
+        <a class="btn btn-primary" href="{{ url_for('novo_user') }}">Novo Usuário</a>
+    </div>
 </div>
 
 <table class="table-container">
@@ -19,7 +22,7 @@
         {% for usuario in usuarios.items %}
         <tr>
             <td style="text-align: center; vertical-align: middle;">{{ usuario.nome }}</td>
-            <td style="text-align: center; vertical-align: middle;">{{ usuario.nickname }}</td>
+            <td style="text-align: center; vertical-align: middle;">{{ usuario.user }}</td>
             <td style="text-align: center; vertical-align: middle; width: 100px; height: 50px;">
                 <a class="fa-solid fa-pen-to-square actions" style="font-size: 20px; text-decoration: none;" href="{{ url_for('editar_user', id=usuario.id) }}"></a>
                 <a class="fa-solid fa-trash actions" style="font-size: 20px; text-decoration: none;" href="{{ url_for('deletar_user', id=usuario.id) }}"></a>
@@ -29,12 +32,11 @@
     </tbody>
 </table>
 
-<div class="pagination-arrows" style="float: right;">
-
+<div class="pagination-arrows" style="float: right;">   
     <div class="pagination-dropdown-container" >
         <select onchange="window.location.href=this.value" class="pagination-dropdown">
             {% for page_num in range(1, usuarios.pages + 1) %}
-                <option value="{{ url_for('user', page=page_num) }}" {% if usuarios.page == page_num %} selected {% endif %}>{{ page_num }}</option>
+                <option value="{{ url_for('user', page=page_num) }} " {% if usuarios.page == page_num %} selected {% endif %}>{{ page_num }}</option>
             {% endfor %}
         </select>
     </div>

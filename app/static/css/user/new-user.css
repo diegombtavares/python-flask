@@ -1,0 +1,62 @@
+.form-user {
+    background-color: #f8f9fa;
+    border-radius: 15px; 
+    padding: 50px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 310px; 
+    width: 280px;
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    box-shadow: 0 50px 50px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+
+.form-user fieldset {
+    border: none; 
+}
+
+.form-user label {
+    display: block; 
+    margin-bottom: 5px; 
+}
+.form-user input[type="text"],
+.form-user input[type="password"],
+.form-user button {
+    border: 1px solid #ccc;
+    padding: 10px; 
+    margin-bottom: 10px; 
+    box-sizing: border-box; 
+    border-radius: 15px;
+}
+
+.form-user input[type="text"],
+.form-user input[type="password"]{
+    width: 100%;
+}
+.back {
+    background-color: #007bff; 
+    color: #fff; 
+    font-weight: bold;
+    font-size: large ;
+    border: none; 
+    cursor: pointer; 
+    background-image: linear-gradient(to right, #002b7f, #0047ab);
+    width: 30%;
+}
+.form-user button {
+    background-color: #007bff; 
+    color: #fff; 
+    font-weight: bold;
+    font-size: large ;
+    border: none; 
+    cursor: pointer; 
+    background-image: linear-gradient(to right, #002b7f, #0047ab);
+    width: 30%;
+}
+.form-user a:hover {
+    text-decoration: underline; 
+}

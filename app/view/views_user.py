@@ -104,7 +104,6 @@ def atualizar_user():
     flash('Erro ao atualizar o usuário. Por favor, corrija os erros no formulário.', 'error')
     return render_template('user/editar-user.html', titulo='Editando Usuário', id=usuario_id, form=form)
 
-
 @app.route('/novo-user')
 def novo_user():
     if 'usuario_logado' not in session or session['usuario_logado'] is None:
@@ -134,5 +133,6 @@ def criar_user():
     novo_user = Usuarios(nome=nome, user=user, senha=senha_hash)
     db.session.add(novo_user)
     db.session.commit()
+    flash('Usuário criado com sucesso')
 
     return redirect(url_for('user'))

@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Devops Culture</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/message.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">    
   </head>
   <body class="body_login" >
@@ -13,16 +13,22 @@
 
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
-                <ul id="messages" class="list-unstyled" style="position: fixed; top: 20px; right: 20px;">
+                <ul id="messages" class="list-unstyled">
                     {% for category, message in messages %}
                         {% if category == 'error' %}
-                            <li class="alert alert-danger">
+                            <li class="alert alert-danger position-relative">
+                                <button type="button" class="close transparent-btn" data-dismiss="alert" aria-label="Close" style="position: absolute; top: 5px; right: 5px;">
+                                    <span aria-hidden="true" style="color: #db2638;">&times;</span>
+                                </button>
                                 <i class="fas fa-exclamation-circle"></i> {{ message }}
                             </li>
-                        {% else %}   
-                            <li class="alert alert-success">
+                        {% else %}
+                            <li class="alert alert-success position-relative">
+                                <button type="button" class="close transparent-btn" data-dismiss="alert" aria-label="Close" style="position: absolute; top: 5px; right: 5px;">
+                                    <span aria-hidden="true" style="color: #155724;">&times;</span>
+                                </button>
                                 <i class="fas fa-check-circle"></i> {{ message }}
-                            </li> 
+                            </li>
                         {% endif %}
                     {% endfor %}
                 </ul>
@@ -30,22 +36,32 @@
         {% endwith %}
 
         <form method="POST" action="{{ url_for('autenticar') }}">
-            <h1 class="titleform" style="text-align: center; font-family: 'Arial', sans-serif; font-size: 28px; color: #333; letter-spacing: 1px;"><strong>Devops Culture</strong></h1>
+            <div class="text-center logo-container"> <!-- Adicionando a classe 'logo-container' -->
+                <img style="width: 240px; height: auto; filter: brightness(0) saturate(100%) invert(9%) sepia(100%) saturate(1678%) hue-rotate(224deg) brightness(112%) contrast(83%);" src="{{ url_for('imagem', nome_arquivo='logo.png') }}" alt="Logo">
+            </div>
             <input type="hidden" name="proxima" value="{{ proxima or url_for('user') }}">
             {{ form.csrf_token() }}
-            <div class="form-group input-with-icon">
-                <i class="fas fa-user"></i>
-                {{ form.user(class="form-control", placeholder="Login") }}
+            <div class="form-group input-with-icon row">
+                <div class="col">
+                    <i class="fas fa-user"></i>
+                    {{ form.user(class="form-control", placeholder="Login") }}
+                </div>
             </div>
-            <div class="form-group input-with-icon">
-                <i class="fas fa-lock"></i>
-                {{ form.senha(class="form-control", placeholder="Senha") }}
-                <span class="input-icon-right pointer" onclick="mostrarSenha()">
-                    <i class="fas fa-eye"></i>
-                </span>
+            <div class="form-group input-with-icon row">
+                <div class="col">
+                    <i class="fas fa-lock"></i>
+                    {{ form.senha(class="form-control", placeholder="Senha") }}
+                    <span class="input-icon-right pointer" onclick="mostrarSenha()">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                </div>
             </div>
+            
             <div class="form-group buttons">
                 {{ form.login(class="btn btn-primary") }}
+            </div>
+            <div class="bottom-links">
+                <a href="#" class="forgot-password-link">Esqueceu a senha?</a>
             </div>
         </form>
     </div>

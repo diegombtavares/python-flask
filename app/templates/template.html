@@ -4,32 +4,36 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Devops Culture</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/message.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global/template.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global/message.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
   </head>
-  <body>
-      <div class="container">
-
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
-                <ul id="messages" class="list-unstyled" style="position: fixed; top: 20px; right: 20px;">
+                <ul id="messages" class="list-unstyled">
                     {% for category, message in messages %}
                         {% if category == 'error' %}
-                            <li class="alert alert-danger">
+                            <li class="alert alert-danger position-relative">
+                                <button type="button" class="close transparent-btn" data-dismiss="alert" aria-label="Close" style="position: absolute; top: 5px; right: 5px;">
+                                    <span aria-hidden="true" style="color: #db2638;">&times;</span>
+                                </button>
                                 <i class="fas fa-exclamation-circle"></i> {{ message }}
                             </li>
-                        {% else %}   
-                            <li class="alert alert-success">
+                        {% else %}
+                            <li class="alert alert-success position-relative">
+                                <button type="button" class="close transparent-btn" data-dismiss="alert" aria-label="Close" style="position: absolute; top: 5px; right: 5px;">
+                                    <span aria-hidden="true" style="color: #155724;">&times;</span>
+                                </button>
                                 <i class="fas fa-check-circle"></i> {{ message }}
-                            </li> 
+                            </li>
                         {% endif %}
                     {% endfor %}
                 </ul>
             {% endif %}
         {% endwith %}
+  <body>
+      <div class="container">
 
         <div class="vertical-bar">
             <ul class="icon-list">
