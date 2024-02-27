@@ -121,7 +121,8 @@ def criar_user():
     nome = form.nome.data
     user = form.user.data
     senha = form.senha.data
-    
+    profile = request.form['role'] 
+
     usuario = Usuarios.query.filter_by(nome=nome).first()
 
     if usuario:
@@ -130,7 +131,7 @@ def criar_user():
 
     senha_hash = generate_password_hash(senha).decode('utf-8') 
 
-    novo_user = Usuarios(nome=nome, user=user, senha=senha_hash)
+    novo_user = Usuarios(nome=nome, user=user, senha=senha_hash, profile=profile) 
     db.session.add(novo_user)
     db.session.commit()
     flash('Usuário criado com sucesso')

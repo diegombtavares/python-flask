@@ -14,7 +14,8 @@
     <thead class="thead-default">
         <tr>  
             <th style="text-align: center; vertical-align: middle;">Nome</th>
-            <th style="text-align: center; vertical-align: middle;">User</th>
+            <th style="text-align: center; vertical-align: middle;">Usuário</th>
+            <th style="text-align: center; vertical-align: middle;">Perfil</th>
             <th style="text-align: center; vertical-align: middle;">Ações</th>
         </tr>
     </thead>
@@ -23,6 +24,7 @@
         <tr>
             <td style="text-align: center; vertical-align: middle;">{{ usuario.nome }}</td>
             <td style="text-align: center; vertical-align: middle;">{{ usuario.user }}</td>
+            <td style="text-align: center; vertical-align: middle;">{{ usuario.profile }}</td>
             <td style="text-align: center; vertical-align: middle; width: 100px; height: 50px;">
                 <a class="fa-solid fa-pen-to-square actions" style="font-size: 20px; text-decoration: none;" href="{{ url_for('editar_user', id=usuario.id) }}"></a>
                 <a class="fa-solid fa-trash actions" style="font-size: 20px; text-decoration: none;" href="{{ url_for('deletar_user', id=usuario.id) }}"></a>

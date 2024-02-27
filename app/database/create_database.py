@@ -32,14 +32,16 @@ TABLES = {}
 
 TABLES['Usuarios'] = ('''
     CREATE TABLE `devops_culture`.`usuarios` (   
-      `id` INT NOT NULL AUTO_INCREMENT,
-      `nome` VARCHAR(50) NOT NULL,
-      `user` VARCHAR(10) NOT NULL,
-      `senha` VARCHAR(100) NOT NULL,
-      PRIMARY KEY (`id`))
-    ENGINE = InnoDB
-    DEFAULT CHARACTER SET = utf8
-    COLLATE = utf8_bin;  ''')
+        `id` INT NOT NULL AUTO_INCREMENT,
+        `nome` VARCHAR(50) NOT NULL,
+        `user` VARCHAR(10) NOT NULL,
+        `profile` VARCHAR(10) NOT NULL,
+        `senha` VARCHAR(100) NOT NULL,
+        `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;  
+''')
 
 for tabela_nome in TABLES:
     tabela_sql = TABLES[tabela_nome]
@@ -58,10 +60,10 @@ for tabela_nome in TABLES:
 
 # inserindo usuários #
         
-usuario_sql = 'INSERT INTO usuarios (nome, user, senha) values (%s,%s,%s)'
+usuario_sql = 'INSERT INTO usuarios (nome, user, profile, senha) values (%s,%s,%s,%s)'
 
 usuarios = [
-    ("Administrator", "adm", generate_password_hash("123").decode('utf-8')),
+    ("Administrator", "adm", "admin", generate_password_hash("123").decode('utf-8')),
 ]
 
 cursor.executemany(usuario_sql,usuarios)

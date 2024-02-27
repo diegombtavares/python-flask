@@ -2,38 +2,44 @@
 {% block conteudo %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/user/new-user.css') }}">
 
-<link rel="stylesheet" href="{{ url_for('static', filename='css/user.css') }}">
-      <div class="form-user">
-          <form action="{{ url_for('criar_user') }}" method="post" enctype="multipart/form-data">
-            <fieldset>
-              {{ form.csrf_token() }}
+
+<div class="form-user">
+  <form action="{{ url_for('criar_user') }}" method="post" enctype="multipart/form-data">
+    <div class="text-center logo-container"> <!-- Adicionando a classe 'logo-container' -->
+        <img style="width: 320px; height: auto; filter: brightness(0) saturate(100%) invert(9%) sepia(100%) saturate(1678%) hue-rotate(224deg) brightness(112%) contrast(83%);" src="{{ url_for('imagem', nome_arquivo='user.png') }}" alt="Logo">
+    </div>
+      <fieldset>
+          {{ form.csrf_token() }}
+          <div>
+            <label for="user"></label>
+            <div>
+                {{ form.user(class="form-control", placeholder="Usuário") }}
+            </div>
+          </div>
+          <div>
+            <label for="nome"></label>
+            <div>
+                {{ form.nome(class="form-control", placeholder="Nome") }}
+            </div>
+        </div>
+          <div>
+              <label for="senha"></label>
               <div>
-                <label for="nome">Nome:</label>
-                <div>
-                  {{ form.nome(class="form-control") }}
-                </div>
+                  {{ form.senha(placeholder="Senha") }}
               </div>
-              <div >
-                <label for="user">Usuário:</label>
-                <div>
-                  {{ form.user(class="form-control") }}
-                </div>
-              </div>
-              <div >
-                <label for="senha" >Senha:</label>
-                <div >
-                  {{ form.senha() }}
-                </div>
-              </div>
-              <div >
-                <div class="action">
-                  <button type="submit">Salvar</button>
-                  <a href="{{ url_for('user') }}">Voltar</a>
-                </div>
-              </div>
-            </fieldset>
-          </form>
-      </div>
-      
-      
+          </div>
+          <div>
+            <select id="role" name="role" class="form-control">
+              <option value="" selected disabled>Perfil</option>
+              <option value="admin">admin</option>
+              <option value="user">user</option>
+          </select>
+          </div>
+          <div class="buttons-container">
+            <button type="submit" class="btn">Salvar</button>
+            <a class="btn back" href="{{ url_for('user') }}">Voltar</a>
+        </div>
+      </fieldset>
+  </form>
+</div>
 {% endblock %}
