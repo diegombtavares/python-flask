@@ -1,5 +1,5 @@
 from main import app, db
-from flask import render_template, request, redirect, session, flash, url_for
+from flask import render_template, request, redirect, session, flash, url_for, send_from_directory
 from models import Usuarios
 from helpers.modules import FormularioUsuario
 from flask_bcrypt import check_password_hash, generate_password_hash
@@ -136,3 +136,7 @@ def criar_user():
     flash('Usuário criado com sucesso')
 
     return redirect(url_for('user'))
+
+@app.route('/uploads/<nome_arquivo>')
+def imagem(nome_arquivo):
+    return send_from_directory('public', nome_arquivo)

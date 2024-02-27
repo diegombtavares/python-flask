@@ -1,6 +1,6 @@
 import os
 
-SECRET_KEY = 'alura'
+SECRET_KEY = 'devops'
 
 SQLALCHEMY_DATABASE_URI = '{SGBD}://{usuario}:{senha}@{servidor}/{database}'.format(
     SGBD = 'mysql+mysqlconnector',

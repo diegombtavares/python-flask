@@ -12,7 +12,7 @@ try:
     )
 
 except mysql.connector.Error as err:
-    if err.errno == 1045:  # Código de erro para acesso negado
+    if err.errno == 1045:
         print('Erro de autenticação: ', err.msg)
     else:
         print('Erro ao conectar:', err)
@@ -27,19 +27,8 @@ cursor.execute("CREATE DATABASE devops_culture;")
 
 cursor.execute("USE devops_culture")
 
-# criando tabelas
+# criando tabelas #
 TABLES = {}
-
-TABLES['Jogos'] = ('''
-    CREATE TABLE `devops_culture`.`jogos` (
-      `id` INT NOT NULL AUTO_INCREMENT,
-      `nome` VARCHAR(50) NOT NULL,
-      `categoria` VARCHAR(40) NOT NULL,
-      `console` VARCHAR(20) NOT NULL,
-      PRIMARY KEY (`id`))
-    ENGINE = InnoDB
-    DEFAULT CHARACTER SET = utf8
-    COLLATE = utf8_bin; ''')
 
 TABLES['Usuarios'] = ('''
     CREATE TABLE `devops_culture`.`usuarios` (   
@@ -65,7 +54,10 @@ for tabela_nome in TABLES:
     else:
         print('ok')
 
-# inserindo usuários
+# criando tabelas #
+
+# inserindo usuários #
+        
 usuario_sql = 'INSERT INTO usuarios (nome, user, senha) values (%s,%s,%s)'
 
 usuarios = [
@@ -79,24 +71,9 @@ print('---------------- Usuários ----------------')
 for user in cursor.fetchall():
     print(user[0])
 
-# inserindo jogos
-jogo_sql = 'INSERT INTO jogos (nome, categoria, console) values (%s,%s,%s)'
-
-jogos = [
-    ("Rainbow Six", "FPS", "PC"),
-    ("God of War", "Hack and Slash", "PS5"),
-    ("Red Dead Redemption II", "Ação", "PC"),
-]
-
-cursor.executemany(jogo_sql,jogos)
-
-cursor.execute('select * from devops_culture.jogos')
-print('---------------- Jogos ----------------')
-for jogo in cursor.fetchall():
-    print(jogo[1])
-
+# inserindo usuários #
+    
 # commitando pra gravar no banco
 conn.commit()
-
 cursor.close()
 conn.close()
